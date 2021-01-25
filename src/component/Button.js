@@ -3,7 +3,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import React, {useEffect} from 'react';
 
-export default function Button({navigation, title, style, action}) {
+export default function Button({ title, style, action}) {
   return (
     <LinearGradient
       colors={['#4c669f', '#3b5998', '#192f6a']}
@@ -18,7 +18,7 @@ var styles = StyleSheet.create({
   linearGradient: {
     paddingLeft: 15,
     paddingRight: 15,
-    borderRadius: 5,
+    justifyContent:'center'
   },
   buttonText: {
     fontSize: 18,

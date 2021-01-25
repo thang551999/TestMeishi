@@ -10,7 +10,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-import {Text, useWindowDimensions} from 'react-native';
+import {Text, useWindowDimensions, View, Image} from 'react-native';
 import {
   LoginScreen,
   HomeScreen,
@@ -31,19 +31,21 @@ const DrawerHome = () => {
       initialRouteName="Home"
       drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
       edgeWidth={50}
-      hideStatusBar={true}
-      overlayColor={0}
       drawerStyle={{
-        width: 240,
+        width: 350,
+      }}
+      drawerContentOptions={{
+        activeTintColor: '#e91e63',
+        itemStyle: {marginVertical: 30},
       }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={StackHome1} />
+      <Drawer.Screen name="Home" component={StackHomeComponent} />
       <Drawer.Screen name="Setting" component={SettingScreen} />
     </Drawer.Navigator>
   );
 };
 
-const StackHome1 = () => {
+const StackHomeComponent = () => {
   return (
     <StackHome.Navigator>
       <StackHome.Screen
@@ -77,13 +79,59 @@ export default function App() {
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
-      <Text>sldklasjd</Text>
-      <DrawerItemList {...props} />
+      <View style={{height: 100, marginVertical: 20}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>Meishi</Text>
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image
+            style={{
+              backgroundColor: 'black',
+              height: 30,
+              width: 30,
+              borderRadius: 15,
+              marginHorizontal: 10,
+            }}
+            source={require('./src/asset/icon/username.png')}
+          />
+          <Text>User Login :006</Text>
+        </View>
+      </View>
+
+      <DrawerItem
+        label="Home"
+        onPress={() => {
+          props.navigation.navigate('Home');
+        }}
+        activeTintColor="red"
+        inactiveTintColor="black"
+        icon={({focused, color, size}) => (
+          <Image source={require('./src/asset/icon/home.png')} />
+        )}
+      />
+
+      <View style={{height: 300}}></View>
+
+      <DrawerItem
+        label="Setting"
+        activeTintColor="red"
+        inactiveTintColor="black"
+        onPress={() => {
+          props.navigation.navigate('Setting');
+        }}
+        icon={({focused, color, size}) => (
+          <Image source={require('./src/asset/icon/setting.png')} />
+        )}
+      />
       <DrawerItem
         label="Logout"
         onPress={() => {
           props.navigation.navigate('Login');
         }}
+        activeTintColor={'blue'}
+        icon={({focused, color, size}) => (
+          <Image source={require('./src/asset/icon/logout.png')} />
+        )}
       />
     </DrawerContentScrollView>
   );
