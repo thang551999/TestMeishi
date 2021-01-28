@@ -10,7 +10,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-import {Text, useWindowDimensions, View, Image} from 'react-native';
+import {Text, useWindowDimensions, View, Image, ScrollView} from 'react-native';
 import {
   LoginScreen,
   HomeScreen,
@@ -21,6 +21,9 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import * as StringCommon from './src/common/StringCommon';
+import * as Constant from './src/common/Constant';
+import CardDetails from './src/screen/CardDetails';
 const StackRoot = createStackNavigator();
 const StackHome = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -32,7 +35,7 @@ const DrawerHome = () => {
       drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
       edgeWidth={50}
       drawerStyle={{
-        width: 350,
+        width: 8 * Constant.windowWidth,
       }}
       drawerContentOptions={{
         activeTintColor: '#e91e63',
@@ -49,9 +52,14 @@ const StackHomeComponent = () => {
   return (
     <StackHome.Navigator>
       <StackHome.Screen
-        name="Home"
+        name={StringCommon.HomeScreen}
         component={HomeScreen}
         options={{gestureEnabled: false, headerShown: false}}
+      />
+      <StackHome.Screen
+        name={StringCommon.CardDetailsScreen}
+        component={CardDetails}
+        // options={{gestureEnabled: false, headerShown: false}}
       />
     </StackHome.Navigator>
   );
@@ -60,14 +68,14 @@ const StackHomeComponent = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <StackRoot.Navigator initialRouteName="Login">
+      <StackRoot.Navigator initialRouteName={StringCommon.LoginScreen}>
         <StackRoot.Screen
-          name="Login"
+          name={StringCommon.LoginScreen}
           component={LoginScreen}
           options={{headerShown: false}}
         />
         <StackRoot.Screen
-          name="Home"
+          name={StringCommon.DrawerHome}
           component={DrawerHome}
           options={{gestureEnabled: false, headerShown: false}}
         />
@@ -78,28 +86,30 @@ export default function App() {
 
 function CustomDrawerContent(props) {
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={{height: 100, marginVertical: 20}}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>Meishi</Text>
-        </View>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image
-            style={{
-              backgroundColor: 'black',
-              height: 30,
-              width: 30,
-              borderRadius: 15,
-              marginHorizontal: 10,
-            }}
-            source={require('./src/asset/icon/username.png')}
-          />
-          <Text>User Login :006</Text>
+    <DrawerContentScrollView scrollEnabled={false} {...props}>
+      <View
+        style={{flexDirection: 'row', alignItems: 'center', marginVertical: 5}}>
+        <Image
+          style={{
+            backgroundColor: 'black',
+            height: 50,
+            width: 50,
+            borderRadius: 25,
+            marginHorizontal: 10,
+          }}
+          source={{
+            uri:
+              'https://images.pexels.com/photos/1684161/pexels-photo-1684161.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+          }}
+        />
+        <View style={{marginHorizontal: 20}}>
+          <Text style={{fontWeight: '700', fontSize: 20}}>00626</Text>
+          <Text style={{fontSize: 17, marginTop: 5, color: 'gray'}}>NSMV</Text>
         </View>
       </View>
 
       <DrawerItem
-        label="Home"
+        label={StringCommon.HomeScreen}
         onPress={() => {
           props.navigation.navigate('Home');
         }}
@@ -110,21 +120,38 @@ function CustomDrawerContent(props) {
         )}
       />
 
-      <View style={{height: 300}}></View>
+      <ScrollView style={{height: Constant.windowHeight * 6}}>
+        <Image
+          style={{
+            backgroundColor: 'black',
+            height: 500,
+            width: Constant.windowWidth * 7,
+            borderRadius: 25,
+            marginHorizontal: 10,
+          }}
+          source={{
+            uri:
+              'https://images.pexels.com/photos/1684161/pexels-photo-1684161.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+          }}
+        />
+      </ScrollView>
 
       <DrawerItem
-        label="Setting"
+        label={StringCommon.DrawerSetting}
         activeTintColor="red"
         inactiveTintColor="black"
         onPress={() => {
           props.navigation.navigate('Setting');
         }}
         icon={({focused, color, size}) => (
-          <Image source={require('./src/asset/icon/setting.png')} />
+          <Image
+            source={require('./src/asset/icon/setting.png')}
+            // resizeMode="center"
+          />
         )}
       />
       <DrawerItem
-        label="Logout"
+        label={StringCommon.TitleDrawerLogout}
         onPress={() => {
           props.navigation.navigate('Login');
         }}

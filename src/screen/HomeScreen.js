@@ -1,29 +1,41 @@
-import {View, Text, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  StatusBar,
+  SafeAreaView,
+  Image,
+  ImageBackground,
+} from 'react-native';
 
 import React from 'react';
+import {Button, FlatlistComponent, HeaderHome} from '../component';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      {/* <FlatList 
-      data ={Data}
-      keyExtractor={(item)=>item.id}
-      renderItem={()=>   <View>  </View>
-      }
-      /> */}
+    <View style={{flex: 1}}>
+      <StatusBar />
 
+      <SafeAreaView style={{backgroundColor: '#7092BE', flex: 1}}>
+        <Image
+          source={{
+            uri:
+              'https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+          }}
+          style={StyleSheet.absoluteFillObject}
+          blurRadius={18}
+        />
+        <HeaderHome navigation={navigation} />
+
+        <FlatlistComponent navigation={navigation} />
+      </SafeAreaView>
     </View>
   );
 }
-const Data =[{
-
-}]
-
-
-// - 2 mon teach + iot  5
-// - 3 mon tu chon  6
-// - 6 mon chuong trinh 15
-// - 1 mon thuc tap ky su  3
-// - Neu hoc lai thi mat 2 mon nua  6
-
+const Data = [
+  {
+    name: 'test1',
+    id: 1,
+    image: '',
+  },
+];

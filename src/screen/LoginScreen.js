@@ -14,14 +14,27 @@ export default function LoginScreen({navigation}) {
   const [userName, setUserName] = useState('');
   const [passWord, setPassWord] = useState('');
   const [showPass, setShowPass] = useState(false);
+  console.log('App 2');
   return (
     <View style={{flex: 1}}>
       <ImageBackground
         style={{flex: 1}}
-        source={require('../asset/icon/wallpaper.png')}
-        resizeMode="cover">
+        source={{
+          uri:
+            'https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
+        }}
+        resizeMode="cover"
+        blurRadius={30}>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={{fontSize: 30}}>Meishi</Text>
+          <Text
+            style={{
+              fontSize: 50,
+              fontWeight: '800',
+              color: 'mediumpurple',
+              fontFamily: 'AcademyEngravedLetPlain',
+            }}>
+            Meishi
+          </Text>
         </View>
         <View style={style.fontLogin}>
           <View style={style.TextInput}>
@@ -82,5 +95,6 @@ const style = StyleSheet.create({
     marginVertical: 15,
     borderRadius: 20,
     alignItems: 'center',
+    height: 45,
   },
 });

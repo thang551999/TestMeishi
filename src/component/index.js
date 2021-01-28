@@ -1,2 +1,4 @@
 import Button from './Button';
-export {Button};
+import HeaderHome from './HeaderHome';
+import FlatlistComponent from './ListCard';
+export {Button, HeaderHome, FlatlistComponent};
