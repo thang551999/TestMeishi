@@ -85,6 +85,7 @@ export default function App() {
 }
 
 function CustomDrawerContent(props) {
+  console.log('App drawer load');
   return (
     <DrawerContentScrollView scrollEnabled={false} {...props}>
       <View

@@ -32,7 +32,7 @@ const CardItemListView = ({item, index, scroolY, navigation}) => {
       <TouchableOpacity
         style={{flexDirection: 'row', flex: 1}}
         onPress={() => {
-          navigation.navigate(StringCommon.CardDetailsScreen);
+          navigation.navigate(StringCommon.CardDetailsScreen, {id: 1});
         }}>
         <>
           <Image

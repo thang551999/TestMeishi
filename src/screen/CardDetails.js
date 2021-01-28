@@ -10,10 +10,12 @@ import {
   Animated,
 } from 'react-native';
 import * as Constant from '../common/Constant';
-const HEADER_MAX_HEIGHT = 200;
+const HEADER_MAX_HEIGHT = 220;
 const HEADER_MIN_HEIGHT = 60;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-export default function CardDetails({navigation}) {
+export default function CardDetails({route, navigation}) {
+  console.log(route.params);
+  // vuot len thi Header sau thanh ten va a
   const scrollY = useRef(new Animated.Value(0)).current;
   const headerHeight = scrollY.interpolate({
     inputRange: [0, HEADER_SCROLL_DISTANCE],
@@ -26,7 +28,7 @@ export default function CardDetails({navigation}) {
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {y: scrollY}}}],
           {
-            useNativeDriver: true,
+            useNativeDriver: false,
           },
         )}>
         <Image

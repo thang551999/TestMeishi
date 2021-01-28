@@ -11,7 +11,8 @@ import {
 import React from 'react';
 import {Button, FlatlistComponent, HeaderHome} from '../component';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({route, navigation}) {
+  console.log(route.params);
   return (
     <View style={{flex: 1}}>
       <StatusBar />

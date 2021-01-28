@@ -23,7 +23,7 @@ const FlatlistComponent = ({navigation}) => {
           />
         );
       }}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.id.toString()}
     />
   );
 };

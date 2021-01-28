@@ -15,14 +15,6 @@ export default function HeaderHome({navigation}) {
         flexDirection: 'row',
         opacity: 1,
       }}>
-      {/* <Image
-        source={{
-          uri:
-            'https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-        }}
-        style={StyleSheet.absoluteFillObject}
-        blurRadius={18}
-      /> */}
       {!isSearch && (
         <TouchableOpacity
           style={{
