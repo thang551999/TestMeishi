@@ -24,6 +24,8 @@ import {
 import * as StringCommon from './src/common/StringCommon';
 import * as Constant from './src/common/Constant';
 import CardDetails from './src/screen/CardDetails';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const StackRoot = createStackNavigator();
 const StackHome = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -88,79 +90,82 @@ function CustomDrawerContent(props) {
   console.log('App drawer load');
   return (
     <DrawerContentScrollView scrollEnabled={false} {...props}>
-      <View
-        style={{flexDirection: 'row', alignItems: 'center', marginVertical: 5}}>
-        <Image
-          style={{
-            backgroundColor: 'black',
-            height: 50,
-            width: 50,
-            borderRadius: 25,
-            marginHorizontal: 10,
-          }}
-          source={{
-            uri:
-              'https://images.pexels.com/photos/1684161/pexels-photo-1684161.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-          }}
-        />
-        <View style={{marginHorizontal: 20}}>
-          <Text style={{fontWeight: '700', fontSize: 20}}>00626</Text>
-          <Text style={{fontSize: 17, marginTop: 5, color: 'gray'}}>NSMV</Text>
-        </View>
-      </View>
-
-      <DrawerItem
-        label={StringCommon.HomeScreen}
-        onPress={() => {
-          props.navigation.navigate('Home');
-        }}
-        activeTintColor="red"
-        inactiveTintColor="black"
-        icon={({focused, color, size}) => (
-          <Image source={require('./src/asset/icon/home.png')} />
-        )}
-      />
-
-      <ScrollView style={{height: Constant.windowHeight * 6}}>
-        <Image
-          style={{
-            backgroundColor: 'black',
-            height: 500,
-            width: Constant.windowWidth * 7,
-            borderRadius: 25,
-            marginHorizontal: 10,
-          }}
-          source={{
-            uri:
-              'https://images.pexels.com/photos/1684161/pexels-photo-1684161.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-          }}
-        />
-      </ScrollView>
-
-      <DrawerItem
-        label={StringCommon.DrawerSetting}
-        activeTintColor="red"
-        inactiveTintColor="black"
-        onPress={() => {
-          props.navigation.navigate('Setting');
-        }}
-        icon={({focused, color, size}) => (
+      <View style={{flex: 1}}>
+        <View
+          style={{flexDirection: 'row', alignItems: 'center', marginTop: 5}}>
           <Image
-            source={require('./src/asset/icon/setting.png')}
-            // resizeMode="center"
+            style={{
+              backgroundColor: 'black',
+              height: 50,
+              width: 50,
+              borderRadius: 25,
+              marginHorizontal: 10,
+            }}
+            source={{
+              uri:
+                'https://images.pexels.com/photos/1684161/pexels-photo-1684161.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            }}
           />
-        )}
-      />
-      <DrawerItem
-        label={StringCommon.TitleDrawerLogout}
-        onPress={() => {
-          props.navigation.navigate('Login');
-        }}
-        activeTintColor={'blue'}
-        icon={({focused, color, size}) => (
-          <Image source={require('./src/asset/icon/logout.png')} />
-        )}
-      />
+          <View style={{marginHorizontal: 20}}>
+            <Text style={{fontWeight: '700', fontSize: 20}}>00626</Text>
+            <Text style={{fontSize: 17, marginTop: 5, color: 'gray'}}>
+              NSMV
+            </Text>
+          </View>
+        </View>
+
+        <DrawerItem
+          label={StringCommon.HomeScreen}
+          onPress={() => {
+            props.navigation.navigate('Home');
+          }}
+          activeTintColor="red"
+          inactiveTintColor="black"
+          icon={() => <Icon name="home" size={30} />}
+        />
+
+        <ScrollView style={{height: Constant.windowHeight * 6 + 20}}>
+          <Image
+            style={{
+              backgroundColor: 'black',
+              height: 500,
+              width: Constant.windowWidth * 7,
+              borderRadius: 25,
+              marginHorizontal: 10,
+            }}
+            source={{
+              uri:
+                'https://images.pexels.com/photos/1684161/pexels-photo-1684161.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            }}
+          />
+        </ScrollView>
+
+        <DrawerItem
+          label={StringCommon.DrawerSetting}
+          activeTintColor="red"
+          inactiveTintColor="black"
+          onPress={() => {
+            props.navigation.navigate('Setting');
+          }}
+          icon={({focused, color, size}) => (
+            <Image
+              source={require('./src/asset/icon/setting.png')}
+              // resizeMode="center"
+            />
+          )}
+        />
+        <DrawerItem
+          label={StringCommon.TitleDrawerLogout}
+          onPress={() => {
+            props.navigation.navigate('Login');
+          }}
+          activeTintColor={'blue'}
+          inactiveTintColor="skyblue"
+          icon={({focused, color, size}) => (
+            <MaterialCommunityIcons name="logout" size={30} />
+          )}
+        />
+      </View>
     </DrawerContentScrollView>
   );
 }

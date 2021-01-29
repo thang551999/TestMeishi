@@ -11,7 +11,6 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button} from 'react-native-paper';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -19,31 +18,39 @@ import * as CallApi from '../action/CallApi';
 import {windowWidth} from '../common/Constant';
 import * as StringCommon from '../common/StringCommon';
 import AlertCusstom from '../component/AlertCusstom';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 // import {Button} from '../component/index';
 export default function LoginScreen({navigation}) {
   const [userName, setUserName] = useState('');
   const [passWord, setPassWord] = useState('');
   const [showPass, setShowPass] = useState(true);
   const [isloading, setLoading] = useState(false);
-
   const login = async (user, password, navigation) => {
     let res = new Object();
     // res.authenticationToken = '';
     console.log(res, 222);
+    console.log(user, password);
     res = await CallApi.login(user, password);
     console.log(res, 111);
 
-    if (res.authenticationToken !== undefined) {
-      navigation.navigate('Home', {
-        itemId: 86,
-      });
+    if (res.authenticationToken === undefined) {
+      navigation.navigate('Home');
       setLoading(false);
+      setUserName('');
+      setPassWord('');
     } else {
       setLoading(false);
-      Alert.alert(StringCommon.Alert, StringCommon.WrongPasswordOrUsername, [
-        {text: 'Ok'},
-      ]);
+      let action = [
+        {
+          text: 'OK',
+          onPress: () => {},
+        },
+      ];
+      AlertCusstom(
+        StringCommon.Alert,
+        StringCommon.WrongPasswordOrUsername,
+        action,
+      );
     }
   };
   return (
@@ -67,6 +74,7 @@ export default function LoginScreen({navigation}) {
                 source={require('../asset/icon/username.png')}
                 style={{height: 30, width: 30, marginHorizontal: 10}}></Image>
               <TextInput
+                value={userName}
                 editable={!isloading}
                 style={{flex: 1, height: 45}}
                 placeholder="UserName"
@@ -79,6 +87,7 @@ export default function LoginScreen({navigation}) {
                 style={{height: 30, width: 30, marginHorizontal: 10}}
                 source={require('../asset/icon/password.png')}></Image>
               <TextInput
+                value={passWord}
                 editable={!isloading}
                 style={{flex: 1, height: 45}}
                 keyboardType="twitter"
@@ -90,9 +99,11 @@ export default function LoginScreen({navigation}) {
                 <View></View>
               ) : (
                 <TouchableOpacity onPress={() => setShowPass(!showPass)}>
-                  <Image
-                    style={{height: 30, width: 30, marginHorizontal: 10}}
-                    source={require('../asset/icon/eye_black.png')}></Image>
+                  <Icon
+                    name={showPass === false ? 'eye-slash' : 'eye'}
+                    size={25}
+                    style={{marginRight: 10}}
+                  />
                 </TouchableOpacity>
               )}
             </View>
