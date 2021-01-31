@@ -59,6 +59,13 @@ export default function CardDetails({route, navigation}) {
             elevation: 4,
             borderRadius: 10,
           }}>
+          <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+            <Name />
+            <Company />
+          </View>
+          <View style={{alignItems: 'center'}}>
+            <Jobtitle />
+          </View>
           <Footer />
         </View>
         <View
@@ -98,7 +105,16 @@ function Phone() {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Icon name="phone-alt" size={20} color="gray" />
+        <Icon
+          name="phone-alt"
+          size={20}
+          color="gray"
+          style={{marginRight: 30}}
+        />
+        <View>
+          <Text style={{color: 'blue'}}>092255199</Text>
+          <Text style={{color: 'gray', marginTop: 5}}>Phone</Text>
+        </View>
       </View>
     </View>
   );
@@ -113,7 +129,54 @@ function Name() {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Icon name="phone-alt" size={20} color="gray" />
+        <Icon style={{marginRight: 10}} name="user" size={20} color="black" />
+        <View>
+          <Text style={{fontWeight: '700', fontSize: 20}}>ThangDp</Text>
+          <Text style={{color: 'gray'}}>UserName</Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+function Company() {
+  return (
+    <View style={{height: 60}}>
+      <View
+        style={{
+          flex: 1,
+          marginHorizontal: 10,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Icon
+          style={{marginRight: 10}}
+          name="building"
+          size={20}
+          color="black"
+        />
+        <View>
+          <Text style={{fontWeight: '700', fontSize: 20}}>NSMV</Text>
+          <Text style={{color: 'gray'}}>Company</Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+function Jobtitle() {
+  return (
+    <View style={{height: 60}}>
+      <View
+        style={{
+          flex: 1,
+          marginHorizontal: 10,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Icon style={{marginRight: 10}} name="user-md" size={20} color="gray" />
+        <View>
+          <Text style={{fontWeight: '700', fontSize: 20}}>Dev</Text>
+          <Text style={{color: 'gray'}}>Job title</Text>
+        </View>
       </View>
     </View>
   );
@@ -128,7 +191,16 @@ function Email() {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Icon name="envelope-open" size={20} color="gray" />
+        <Icon
+          name="envelope-open"
+          size={20}
+          color="gray"
+          style={{marginRight: 30}}
+        />
+        <View>
+          <Text style={{color: 'blue'}}>thang.dp@gmail.com</Text>
+          <Text style={{color: 'gray', marginTop: 5}}>Email</Text>
+        </View>
       </View>
     </View>
   );
@@ -143,7 +215,16 @@ function Address() {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Icon name="map-marker-alt" size={20} color="gray" />
+        <Icon
+          name="map-marker-alt"
+          size={20}
+          color="gray"
+          style={{marginRight: 30}}
+        />
+        <View>
+          <Text>15 DUy Tan</Text>
+          <Text style={{color: 'gray', marginTop: 5}}>Location</Text>
+        </View>
       </View>
     </View>
   );
@@ -158,7 +239,16 @@ function WebSite() {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <MaterialCommunityIcons name="web" size={20} color="gray" />
+        <MaterialCommunityIcons
+          name="web"
+          size={20}
+          color="gray"
+          style={{marginRight: 30}}
+        />
+        <View>
+          <Text style={{color: 'blue'}}>NSMV.com</Text>
+          <Text style={{color: 'gray', marginTop: 5}}>WebSite</Text>
+        </View>
       </View>
     </View>
   );
@@ -177,7 +267,12 @@ function Note() {
           name="note-multiple-outline"
           size={20}
           color="gray"
+          style={{marginRight: 30}}
         />
+        <View>
+          <Text>Hoi Kem </Text>
+          <Text style={{color: 'gray', marginTop: 5}}>Note</Text>
+        </View>
       </View>
     </View>
   );
