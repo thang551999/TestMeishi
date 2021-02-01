@@ -34,7 +34,7 @@ export default function LoginScreen({navigation}) {
     console.log(res, 111);
 
     if (res.authenticationToken === undefined) {
-      navigation.navigate('Home');
+      navigation.navigate(StringCommon.DrawerHome);
       setLoading(false);
       setUserName('');
       setPassWord('');

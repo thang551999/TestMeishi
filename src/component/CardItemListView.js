@@ -6,8 +6,10 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Linking,
 } from 'react-native';
 import * as StringCommon from '../common/StringCommon';
+
 const CardItemListView = ({item, index, scroolY, navigation}) => {
   const inputreang = [-1, 0, index * 130, (index + 2) * 130];
   const inputreang1 = [-1, 0, index * 130, (index + 1) * 130];
@@ -53,11 +55,21 @@ const CardItemListView = ({item, index, scroolY, navigation}) => {
               {item.jobtitle}
             </Text>
             <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-              <Image source={require('../asset/icon/call.png')} />
-              <Image
-                style={{marginLeft: 10}}
-                source={require('../asset/icon/chat.png')}
-              />
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(`tel:0922255199`);
+                }}>
+                <Image source={require('../asset/icon/call.png')} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  Linking.openURL(`sms:0922255199`);
+                }}>
+                <Image
+                  style={{marginLeft: 10}}
+                  source={require('../asset/icon/chat.png')}
+                />
+              </TouchableOpacity>
             </View>
             <Image />
           </View>

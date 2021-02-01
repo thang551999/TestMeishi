@@ -10,12 +10,21 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-import {Text, useWindowDimensions, View, Image, ScrollView} from 'react-native';
+import {
+  Text,
+  useWindowDimensions,
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 import {
   LoginScreen,
   HomeScreen,
   SettingScreen,
-  LogoutScreen,
+  EditDetect,
+  History,
+  EditDetectCard,
 } from './src/screen/index';
 import {
   DrawerContentScrollView,
@@ -26,6 +35,8 @@ import * as Constant from './src/common/Constant';
 import CardDetails from './src/screen/CardDetails';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import UploadScreen from './src/screen/UploadScreen';
 const StackRoot = createStackNavigator();
 const StackHome = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -62,6 +73,26 @@ const StackHomeComponent = () => {
         name={StringCommon.CardDetailsScreen}
         component={CardDetails}
         // options={{gestureEnabled: false, headerShown: false}}
+      />
+      <StackHome.Screen
+        name={StringCommon.UploadScreen}
+        component={UploadScreen}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+      <StackHome.Screen
+        name={StringCommon.EditDetectScreen}
+        component={EditDetect}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+      <StackHome.Screen
+        name={StringCommon.HistoryScreen}
+        component={History}
+        options={{gestureEnabled: false, headerShown: false}}
+      />
+      <StackHome.Screen
+        name={StringCommon.EditDetailsCard}
+        component={EditDetectCard}
+        //options={{gestureEnabled: false, headerShown: false}}
       />
     </StackHome.Navigator>
   );
@@ -124,20 +155,66 @@ function CustomDrawerContent(props) {
           icon={() => <Icon name="home" size={30} />}
         />
 
-        <ScrollView style={{height: Constant.windowHeight * 6 + 20}}>
-          <Image
+        <ScrollView style={{height: Constant.windowHeight * 6, marginTop: 5}}>
+          <View
             style={{
-              backgroundColor: 'black',
-              height: 500,
-              width: Constant.windowWidth * 7,
-              borderRadius: 25,
-              marginHorizontal: 10,
-            }}
-            source={{
-              uri:
-                'https://images.pexels.com/photos/1684161/pexels-photo-1684161.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-            }}
-          />
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              backgroundColor: 'skyblue',
+            }}>
+            <TouchableOpacity style={styles.button}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  padding: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text>Name</Text>
+                <Icon
+                  name="arrow-up"
+                  size={20}
+                  style={{marginLeft: 5}}
+                  color="white"
+                />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  padding: 5,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text>Company</Text>
+                <Icon
+                  name="arrow-up"
+                  size={20}
+                  style={{marginLeft: 5}}
+                  color="white"
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+
+              borderBottomColor: 'gray',
+
+              borderBottomWidth: 1,
+              padding: 3,
+            }}>
+            <Text>Total</Text>
+            <Text>100</Text>
+          </TouchableOpacity>
+          <ScrollView>
+            <Name />
+            <Name />
+            <Name />
+          </ScrollView>
         </ScrollView>
 
         <DrawerItem
@@ -167,5 +244,42 @@ function CustomDrawerContent(props) {
         />
       </View>
     </DrawerContentScrollView>
+  );
+}
+const styles = StyleSheet.create({
+  button: {
+    margin: 2,
+    borderWidth: 2,
+    borderColor: 'white',
+    flex: 1,
+  },
+});
+function Name() {
+  let s = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  console.log(s);
+  return (
+    <>
+      <View style={{backgroundColor: 'gray'}}>
+        <Text style={{padding: 4}}>A</Text>
+      </View>
+      {s.map((s) => {
+        console.log(s);
+        return (
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+
+              borderBottomColor: 'gray',
+
+              borderBottomWidth: 1,
+              padding: 3,
+            }}>
+            <Text>An</Text>
+            <Text>1</Text>
+          </View>
+        );
+      })}
+    </>
   );
 }

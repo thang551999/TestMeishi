@@ -1,74 +1,35 @@
 import React, {useEffect, useState} from 'react';
 import {useRef} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  Button,
   Image,
   ScrollView,
-  Animated,
   TouchableOpacity,
   Linking,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
 } from 'react-native';
 import * as Constant from '../common/Constant';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as StringCommon from '../common/StringCommon';
-const HEADER_MAX_HEIGHT = 220;
-const HEADER_MIN_HEIGHT = 60;
-const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-export default function CardDetails({route, navigation}) {
-  console.log(route.params);
+import {Button, ProgressBar} from 'react-native-paper';
 
-  const scrollY = useRef(new Animated.Value(0)).current;
-  const headerHeight = scrollY.interpolate({
-    inputRange: [0, HEADER_SCROLL_DISTANCE],
-    outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-    extrapolate: 'clamp',
-  });
+export default function EditDetectCard({route, navigation}) {
+  const [loadingSave, setloadingSave] = useState(false);
+  const [loadingInput, setLoadingInput] = useState(false);
+
   return (
-    <View style={{flex: 1}}>
-      {/* <Animated.View style={{marginTop: headerHeight}}>
-        <Text>askjdklj</Text>
-      </Animated.View> */}
-      <Animated.ScrollView
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: scrollY}}}],
-          {
-            useNativeDriver: false,
-          },
-        )}>
+    <SafeAreaView>
+      <ScrollView>
         <Image
           style={{height: 220, width: Constant.windowWidth * 10}}
           source={require('../asset/image/ImageCardTest/100092.jpeg')}
           resizeMode="contain"
         />
 
-        <View
-          style={{
-            margin: 10,
-            backgroundColor: 'white',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.23,
-            shadowRadius: 2.62,
-
-            elevation: 4,
-            borderRadius: 10,
-          }}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-            <Name />
-            <Company />
-          </View>
-          <View style={{alignItems: 'center'}}>
-            <Jobtitle />
-          </View>
-          <Footer navigation={navigation} />
-        </View>
         <View
           style={{
             flex: 1,
@@ -85,14 +46,48 @@ export default function CardDetails({route, navigation}) {
             elevation: 4,
             borderRadius: 10,
           }}>
+          <Name />
+          <Company />
+          <Jobtitle />
           <Phone />
           <Email />
           <Address />
           <WebSite />
           <Note />
         </View>
-      </Animated.ScrollView>
-    </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 3,
+            alignItems: 'center',
+            justifyContent: 'space-around',
+          }}>
+          <Button
+            loading={loadingSave}
+            mode="contained"
+            onPress={() => {
+              setloadingSave(true);
+              setTimeout(() => {
+                navigation.navigate(StringCommon.HomeScreen);
+              }, 2000);
+            }}>
+            Send To Input
+          </Button>
+          <Button
+            loading={loadingInput}
+            mode="contained"
+            onPress={() => {
+              setLoadingInput(true);
+              setTimeout(() => {
+                navigation.navigate(StringCommon.HomeScreen);
+              }, 2000);
+            }}>
+            Save
+          </Button>
+        </View>
+        <View style={{height: 30}}></View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -112,13 +107,10 @@ function Phone() {
           color="gray"
           style={{marginRight: 30}}
         />
-        <TouchableOpacity
-          onPress={() => {
-            Linking.openURL(`tel:092255199`);
-          }}>
-          <Text style={{color: 'blue'}}>092255199</Text>
+        <View>
+          <TextInput>092255199</TextInput>
           <Text style={{color: 'gray', marginTop: 5}}>Phone</Text>
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -133,10 +125,10 @@ function Name() {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Icon style={{marginRight: 10}} name="user" size={20} color="black" />
+        <Icon style={{marginRight: 30}} name="user" size={20} color="black" />
         <View>
-          <Text style={{fontWeight: '700', fontSize: 20}}>ThangDp</Text>
-          <Text style={{color: 'gray'}}>UserName</Text>
+          <TextInput>thangdp</TextInput>
+          <Text style={{color: 'gray', marginTop: 5}}>name</Text>
         </View>
       </View>
     </View>
@@ -153,13 +145,13 @@ function Company() {
           alignItems: 'center',
         }}>
         <Icon
-          style={{marginRight: 10}}
+          style={{marginRight: 30}}
           name="building"
           size={20}
           color="black"
         />
         <View>
-          <Text style={{fontWeight: '700', fontSize: 20}}>NSMV</Text>
+          <TextInput>NSMV</TextInput>
           <Text style={{color: 'gray'}}>Company</Text>
         </View>
       </View>
@@ -176,10 +168,10 @@ function Jobtitle() {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Icon style={{marginRight: 10}} name="user-md" size={20} color="gray" />
+        <Icon style={{marginRight: 30}} name="user-md" size={20} color="gray" />
         <View>
-          <Text style={{fontWeight: '700', fontSize: 20}}>Dev</Text>
-          <Text style={{color: 'gray'}}>Job title</Text>
+          <Text>Dev</Text>
+          <TextInput style={{color: 'gray'}}>Job title</TextInput>
         </View>
       </View>
     </View>
@@ -201,15 +193,10 @@ function Email() {
           color="gray"
           style={{marginRight: 30}}
         />
-        <TouchableOpacity
-          onPress={() => {
-            Linking.openURL(
-              'mailto:thangdp.nsmv@gmail.com?subject=SendMail&body=Description',
-            );
-          }}>
-          <Text style={{color: 'blue'}}>thang.dp@gmail.com</Text>
+        <View>
+          <TextInput>thang.dp@gmail.com</TextInput>
           <Text style={{color: 'gray', marginTop: 5}}>Email</Text>
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -298,89 +285,17 @@ function Footer({navigation}) {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate(StringCommon.HistoryScreen);
-        }}
-        style={{justifyContent: 'center', alignItems: 'center'}}>
-        <View
-          style={{
-            backgroundColor: '#448bff',
-            height: 40,
-            width: 40,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
-            borderRadius: 20,
-          }}>
-          <Icon name="clipboard" color="white" size={20} />
-        </View>
-        <Text>History</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={{justifyContent: 'center', alignItems: 'center'}}
-        onPress={() => {
-          let phoneNumber = `telprompt:0922255199`;
-          Linking.canOpenURL(phoneNumber)
-            .then((supported) => {
-              if (!supported) {
-                Alert.alert('Phone number is not available');
-              } else {
-                return Linking.openURL(phoneNumber);
-              }
-            })
-            .catch((err) => console.log(err));
-        }}>
-        <View
-          style={{
-            backgroundColor: '#f1b30c',
-            height: 40,
-            width: 40,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
-            borderRadius: 20,
-          }}>
-          <Icon name="phone-alt" color="white" size={20} />
-        </View>
-        <Text>Phone</Text>
-      </TouchableOpacity>
-
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <View
-          style={{
-            backgroundColor: '#9fc826',
-            height: 40,
-            width: 40,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
-            borderRadius: 20,
-          }}>
-          <Icon name="paper-plane" color="white" size={20} />
-        </View>
-        <Text>Mail</Text>
-      </View>
-      <TouchableOpacity
-        style={{justifyContent: 'center', alignItems: 'center'}}
-        onPress={() => {
-          navigation.navigate(StringCommon.EditDetailsCard);
-        }}>
-        <View
-          style={{
-            backgroundColor: '#27b2a6',
-            height: 40,
-            width: 40,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 20,
-            borderRadius: 20,
-          }}>
-          <Icon name="pencil-alt" color="white" size={20} />
-        </View>
-        <Text>Edit</Text>
-      </TouchableOpacity>
+      <Button
+        loading={loadingSave}
+        mode="contained"
+        onPress={() => navigation.navigate(StringCommon.HomeScreen)}>
+        Send To Input
+      </Button>
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate(StringCommon.HomeScreen)}>
+        Save
+      </Button>
     </View>
   );
 }

@@ -12,6 +12,7 @@ import {
 import React from 'react';
 import {Button, FlatlistComponent, HeaderHome} from '../component';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as StringCommon from '../common/StringCommon';
 
 export default function HomeScreen({route, navigation}) {
   console.log(route.params);
@@ -31,8 +32,12 @@ export default function HomeScreen({route, navigation}) {
         <HeaderHome navigation={navigation} />
 
         <FlatlistComponent navigation={navigation} />
-        <TouchableOpacity style={styles.buttonupload}>
-          <Icon name="plus-square" size={25} color="white" />
+        <TouchableOpacity
+          style={styles.buttonupload}
+          onPress={() => {
+            navigation.navigate(StringCommon.UploadScreen);
+          }}>
+          <Icon name="camera" size={25} color="white" />
         </TouchableOpacity>
       </SafeAreaView>
     </View>
