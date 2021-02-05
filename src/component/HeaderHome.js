@@ -106,10 +106,10 @@ function SearchOption() {
           }}>
           <Text style={{marginLeft: 5}}>Name</Text>
           <Icon
-            name="check-circle"
+            name="times-circle"
             size={20}
-            color="blue"
-            style={{marginLeft: 5}}
+            color="red"
+            style={{marginLeft: 7}}
           />
         </View>
         <View
@@ -124,7 +124,7 @@ function SearchOption() {
           <Icon
             name="check-circle"
             size={20}
-            color="blue"
+            color="green"
             style={{marginLeft: 5}}
           />
         </View>
@@ -140,7 +140,7 @@ function SearchOption() {
           <Icon
             name="check-circle"
             size={20}
-            color="blue"
+            color="green"
             style={{marginLeft: 5}}
           />
         </View>
@@ -156,7 +156,7 @@ function SearchOption() {
           <Icon
             name="check-circle"
             size={20}
-            color="blue"
+            color="green"
             style={{marginLeft: 5}}
           />
         </View>
@@ -172,7 +172,7 @@ function SearchOption() {
           <Icon
             name="check-circle"
             size={20}
-            color="blue"
+            color="green"
             style={{marginLeft: 5}}
           />
         </View>

@@ -40,30 +40,39 @@ import UploadScreen from './src/screen/UploadScreen';
 const StackRoot = createStackNavigator();
 const StackHome = createStackNavigator();
 const Drawer = createDrawerNavigator();
-const DrawerHome = () => {
+const DrawerHome = (e) => {
+  console.log(e)
   const dimensions = useWindowDimensions();
-  return (
-    <Drawer.Navigator
-      initialRouteName="Home"
-      drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
-      edgeWidth={50}
-      drawerStyle={{
-        width: 8 * Constant.windowWidth,
-      }}
-      drawerContentOptions={{
-        activeTintColor: '#e91e63',
-        itemStyle: {marginVertical: 30},
-      }}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={StackHomeComponent} />
-      <Drawer.Screen name="Setting" component={SettingScreen} />
-    </Drawer.Navigator>
-  );
+  try {
+    return (
+      <Drawer.Navigator
+        initialRouteName="HomeDrawer"
+        drawerType={dimensions.width >= 768 ? 'permanent' : 'front'}
+        edgeWidth={50}
+        drawerStyle={{
+          width: 8 * Constant.windowWidth,
+        }}
+        drawerContentOptions={{
+          activeTintColor: '#e91e63',
+          itemStyle: {marginVertical: 30},
+        }}
+        drawerContent={(props) => <CustomDrawerContent {...props} />}>
+        {console.log('58')}
+        <Drawer.Screen name="HomeDrawer" component={StackHomeComponent} />
+        <Drawer.Screen name="Setting" component={SettingScreen} />
+      </Drawer.Navigator>
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const StackHomeComponent = () => {
+const StackHomeComponent = (a) => {
+  {
+    console.log(a);
+  }
   return (
-    <StackHome.Navigator>
+    <StackHome.Navigator initialRouteName={StringCommon.HomeScreen}>
       <StackHome.Screen
         name={StringCommon.HomeScreen}
         component={HomeScreen}
@@ -148,7 +157,10 @@ function CustomDrawerContent(props) {
         <DrawerItem
           label={StringCommon.HomeScreen}
           onPress={() => {
-            props.navigation.navigate('Home');
+            {
+              console.log('155');
+            }
+            props.navigation.navigate('HomeDrawer',{});
           }}
           activeTintColor="red"
           inactiveTintColor="black"
@@ -256,14 +268,13 @@ const styles = StyleSheet.create({
 });
 function Name() {
   let s = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  console.log(s);
+
   return (
     <>
       <View style={{backgroundColor: 'gray'}}>
         <Text style={{padding: 4}}>A</Text>
       </View>
       {s.map((s) => {
-        console.log(s);
         return (
           <View
             style={{

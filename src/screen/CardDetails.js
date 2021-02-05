@@ -12,6 +12,8 @@ import {
   Linking,
 } from 'react-native';
 import * as Constant from '../common/Constant';
+import ListImage from '../component/ListImage';
+
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as StringCommon from '../common/StringCommon';
@@ -39,12 +41,7 @@ export default function CardDetails({route, navigation}) {
             useNativeDriver: false,
           },
         )}>
-        <Image
-          style={{height: 220, width: Constant.windowWidth * 10}}
-          source={require('../asset/image/ImageCardTest/100092.jpeg')}
-          resizeMode="contain"
-        />
-
+        <ListImage />
         <View
           style={{
             margin: 10,
@@ -230,10 +227,18 @@ function Address() {
           color="gray"
           style={{marginRight: 30}}
         />
-        <View>
+        <TouchableOpacity
+          onPress={() => {
+            let address = '15 Duy Tân';
+            let url = Platform.select({
+              ios: `maps:0,0?q=${address}`,
+              android: `geo:0,0?q=${address}`,
+            });
+            Linking.openURL(url);
+          }}>
           <Text>15 DUy Tan</Text>
           <Text style={{color: 'gray', marginTop: 5}}>Location</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

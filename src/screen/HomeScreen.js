@@ -14,8 +14,8 @@ import {Button, FlatlistComponent, HeaderHome} from '../component';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as StringCommon from '../common/StringCommon';
 
-export default function HomeScreen({route, navigation}) {
-  console.log(route.params);
+export default function HomeScreen({navigation}) {
+  console.log(1234567);
   return (
     <View style={{flex: 1}}>
       <StatusBar />
