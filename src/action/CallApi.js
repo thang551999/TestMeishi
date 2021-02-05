@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { loginurl } from '../common/Config';
 export async function login(username, password) {
   const config = {
     headers: {
@@ -9,7 +10,7 @@ export async function login(username, password) {
 
   try {
     let res = await axios.post(
-      'https://nsmp-meishi.com/api/login',
+      loginurl,
       body,
       config,
     );
@@ -17,28 +18,9 @@ export async function login(username, password) {
   } catch (error) {
     return error;
   }
-  // let a = await fetch('https://nsmp-meishi.com/api/login', {
-  // method: 'POST',
-  // headers: {
-  // 'Content-Type': 'application/x-www-form-urlencoded',
-  // },
-  // body: 'userName=' + username + '&password=' + password,
-  // });
-
-  // return await a.json();
+ 
 }
 
-// export async function test() {
-//   return Promise()
-//   let a = 0;
-//   setTimeout(() => {
-//     console.log(3000);
-//     return '1';
-//   }, 3000);
-//   setTimeout(() => {
-//     console.log(2000);
-//     return '2';
-//   }, 2000);
-
-//   return 1;
-// }
+export function GetListCard (){
+let res =await axios.get()
+}

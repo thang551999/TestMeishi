@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert,
+  Platform,
 } from 'react-native';
 import {Button} from 'react-native-paper';
 
@@ -59,7 +59,7 @@ export default function LoginScreen({navigation}) {
       onPress={() => {
         Keyboard.dismiss();
       }}>
-      <KeyboardAvoidingView style={{flex: 1}} enabled behavior={'padding'}>
+      <KeyboardAvoidingView style={{flex: 1}} enabled  behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <ImageBackground
           style={{flex: 1}}
           source={{
